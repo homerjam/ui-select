@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.12.0 - 2015-05-28T07:44:11.360Z
+ * Version: 0.12.0 - 2015-06-23T19:20:06.734Z
  * License: MIT
  */
 
@@ -1706,6 +1706,8 @@ uis.directive('uiSelectSort', ['$timeout', 'uiSelectConfig', 'uiSelectMinErr', f
         }
 
         move.apply(theList, [droppedItemIndex, newIndex]);
+        
+        scope.$parent.$selectMultiple.updateModel();
 
         scope.$apply(function() {
           scope.$emit('uiSelectSort:change', {
