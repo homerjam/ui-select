@@ -2161,6 +2161,44 @@ describe('ui-select tests', function() {
       expect(el.scope().$select.multiple).toBe(true);
     });
 
+    it('should have tolerance for undefined values', function () {
+
+      scope.modelValue = undefined;
+
+      var el = compileTemplate(
+          '<ui-select multiple ng-model="modelValue" theme="bootstrap" style="width: 800px;"> \
+              <ui-select-match placeholder="Pick one...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match> \
+              <ui-select-choices repeat="person.email as person in people | filter: $select.search"> \
+                <div ng-bind-html="person.name | highlight: $select.search"></div> \
+                <div ng-bind-html="person.email | highlight: $select.search"></div> \
+              </ui-select-choices> \
+          </ui-select> \
+          '
+      );
+
+      expect($(el).scope().$select.selected).toEqual([]);
+
+    });
+
+    it('should have tolerance for null values', function () {
+
+      scope.modelValue = null;
+
+      var el = compileTemplate(
+          '<ui-select multiple ng-model="modelValue" theme="bootstrap" style="width: 800px;"> \
+              <ui-select-match placeholder="Pick one...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match> \
+              <ui-select-choices repeat="person.email as person in people | filter: $select.search"> \
+                <div ng-bind-html="person.name | highlight: $select.search"></div> \
+                <div ng-bind-html="person.email | highlight: $select.search"></div> \
+              </ui-select-choices> \
+          </ui-select> \
+          '
+      );
+
+      expect($(el).scope().$select.selected).toEqual([]);
+
+    });
+
     it('should allow paste tag from clipboard', function() {
       scope.taggingFunc = function (name) {
         return {
